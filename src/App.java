@@ -1050,7 +1050,6 @@ public class App {
 
   public static void createUser(int createCardNumber, int createPin, String createName, int createBalance, JFrame frame) {
     if (!usedCardNumbers.contains(createCardNumber)) {
-        System.out.println(usedCardNumbers.contains(createCardNumber));
 
         usedCardNumbers.add(createCardNumber);
 
