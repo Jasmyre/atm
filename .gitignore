@@ -1,5 +1,9 @@
 /.vscode
+./vscode
 /.bin
+./bin
 /.lib
+./lib
 *.class
+./src/tempCodeRunnerFile.java
 ./src/tempCodeRunnerFile.java
