@@ -13,6 +13,8 @@ public class App {
   public static HashMap<Integer, Integer> balanceInfo = new HashMap<Integer, Integer>();
   public static ArrayList<Integer> usedCardNumbers = new ArrayList<Integer>();
 
+  public static boolean fullScreen = false;
+
   public static class WithdrawGUI implements ActionListener {
     JFrame frame = new JFrame("Withdraw");
 
@@ -47,6 +49,9 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      if (fullScreen) {
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+      }
 
       header.setLayout(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
@@ -115,6 +120,7 @@ public class App {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 0, 0, 0);
         panel.add(withAmountLabel, gbc);
 
         gbc.gridx = 0;
@@ -159,7 +165,7 @@ public class App {
       if (e.getSource().equals(confirmBtn)) {
         int userWithdrawAmount = Integer.parseInt(withAmount.getText());
 
-        if (userWithdrawAmount > 0 && (userBalance - userWithdrawAmount) > 0) {
+        if (userWithdrawAmount > 0 && (userBalance - userWithdrawAmount) >= 0) {
             userBalance = userBalance - userWithdrawAmount;
 
             JOptionPane.showMessageDialog(null, "Withdraw Successful!");
@@ -211,6 +217,9 @@ public class App {
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        if (fullScreen) {
+          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
 
         header.setLayout(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
@@ -334,11 +343,11 @@ public class App {
         int userDepoAmount = Integer.parseInt(depoAmount.getText());
 
         if (userDepoAmount > 0) {
-            frame.dispose();
-            addBalance(userDepoAmount);
-
+          addBalance(userDepoAmount);
+            
             JOptionPane.showMessageDialog(null, "Deposit Successfull!");
-
+            
+            frame.dispose();
             new HomeGUI(userName, userBalance);
         }
       } else if (e.getSource().equals(headerBackBtn)) {
@@ -366,6 +375,7 @@ public class App {
     JPanel panel = new JPanel();
     JButton backBtn = new JButton("Back");
     JButton logoutBtn = new JButton("log out.");
+    JLabel balanceHeader = new JLabel("<html><h1 style='font-weight; bold;'>Balance</h1></html>");
 
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -376,13 +386,30 @@ public class App {
         userName = paramUserName;
         userBalance = paramUserBalance;
 
-        JLabel balanceText = new JLabel("<html><h2>Balance: " + userBalance + "</h2></html>");
-        JLabel userNameText = new JLabel("Name: " + userName);
+        JLabel userNameText = new JLabel("Name:");
+        JLabel balanceText = new JLabel("Balance:");
+
+        JLabel userNameBox = new JLabel(userName);
+        JLabel balanceBox = new JLabel(String.valueOf(userBalance));
+
+        userNameBox.setForeground(new Color(0xffffff));
+        userNameBox.setFont(new Font("Arial", Font.BOLD, 12));
+        userNameBox.setBackground(new Color(0x019bfe));
+        userNameBox.setForeground(Color.white);
+        userNameBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0), 2), BorderFactory.createEmptyBorder(8, 8, 8, 8)));
+
+        balanceBox.setForeground(new Color(0xfcfcfc));
+        balanceBox.setFont(new Font("Arial", Font.BOLD, 12));
+        balanceBox.setBackground(new Color(0x019bfe));
+        balanceBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0), 2), BorderFactory.createEmptyBorder(8, 8, 8, 8)));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        if (fullScreen) {
+          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
 
         header.setLayout(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
@@ -440,25 +467,60 @@ public class App {
 
         panel.setLayout(new GridBagLayout());
 
+        if (fullScreen) {
+          gbc.gridx = 0;
+          gbc.gridy = 0;
+          if (fullScreen) {gbc.gridy = 0;}
+          panel.add(balanceHeader, gbc);
+        }
+
         gbc.gridx = 0;
         gbc.gridy = 0;
+        if (fullScreen) {gbc.gridy = 1;}
         panel.add(balanceIcon, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.insets = new Insets(0, 0, 0, 0);
+        if (fullScreen) {gbc.gridy = 2;}
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(16, 0, 0, 0);
         userNameText.setForeground(new Color(0x6e6e6e));
         userNameText.setFont(new Font("Arial", Font.BOLD, 16));
+        userNameText.setPreferredSize(new Dimension(200, 16));
         panel.add(userNameText, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        balanceText.setForeground(new Color(0x6e6e6e));
-        panel.add(balanceText, gbc);
+        if (fullScreen) {gbc.gridy = 3;}
+        gbc.insets = new Insets(0, 0, 0, 0);
+        userNameBox.setPreferredSize(new Dimension(200, 32));
+        userNameBox.setForeground(new Color(0xffffff));
+        userNameBox.setOpaque(true);
+        panel.add(userNameBox, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
+        if (fullScreen) {gbc.gridy = 4;}
+        gbc.insets = new Insets(16, 0, 0, 0);
+        balanceText.setForeground(new Color(0x6e6e6e));
+        balanceText.setFont(new Font("Arial", Font.BOLD, 16));
+        balanceText.setPreferredSize(new Dimension(200, 16));
+        panel.add(balanceText, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        if (fullScreen) {gbc.gridy = 5;}
         gbc.insets = new Insets(0, 0, 0, 0);
+        balanceBox.setPreferredSize(new Dimension(200, 32));
+        balanceBox.setForeground(new Color(0xffffff));
+        balanceBox.setOpaque(true);
+        panel.add(balanceBox, gbc);
+
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        if (fullScreen) {gbc.gridy = 6;}
+        gbc.insets = new Insets(8, 0, 0, 0);
         logoutBtn.addActionListener(this);
         logoutBtn.setFocusable(false);
         logoutBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -485,11 +547,11 @@ public class App {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (e.getSource().equals(headerBackBtn)) {
-        frame.dispose();
         new HomeGUI(userName, userBalance);
-      } else if (e.getSource().equals(logoutBtn)) {
         frame.dispose();
+      } else if (e.getSource().equals(logoutBtn)) {
         new IntroGUI();
+        frame.dispose();
       }
     }
     
@@ -497,6 +559,7 @@ public class App {
 
   public static class HomeGUI implements ActionListener {
     JFrame frame = new JFrame("HOME");
+    JLabel atnIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH)));
 
     JPanel panel = new JPanel();
     JPanel innerPanel = new JPanel();
@@ -522,13 +585,13 @@ public class App {
         userName = paramUserName;
         userBalance = paramUserBalance;
 
-        // System.out.println(paramUserName);
-        // System.out.println(paramUserBalance);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        if (fullScreen) {
+          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
 
         header.setLayout(new BorderLayout());
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
@@ -637,7 +700,7 @@ public class App {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel(new ImageIcon(new ImageIcon(".\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH))));
+        panel.add(atnIcon);
         
         frame.add(innerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
@@ -647,15 +710,14 @@ public class App {
     @Override
     public void actionPerformed(ActionEvent e) {
       if (e.getSource().equals(balance)) {
-        frame.dispose();
-
         new BalanceGUI(userName, userBalance);
+        frame.dispose();
       } else if (e.getSource().equals(deposit)) {
-        frame.dispose();
         new DepositGUI(userName, userBalance);
-      } else if (e.getSource().equals(withdraw)) {
         frame.dispose();
+      } else if (e.getSource().equals(withdraw)) {
         new WithdrawGUI(userName, userBalance);
+        frame.dispose();
       }
     }
   }
@@ -679,6 +741,9 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      if (fullScreen) {
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+      }
 
       panel.setLayout(new GridBagLayout());
       panel.setBackground(new Color(0xedebeb));
@@ -782,11 +847,9 @@ public class App {
           if (pinInfo.get(userCardNumber).equals(userPin)) {
             String userName = nameInfo.get(userCardNumber);
             int userBalance = balanceInfo.get(userCardNumber);
-            // System.out.println(userName);
-            // System.out.println(userBalance);
 
-            frame.dispose();
             new HomeGUI(userName, userBalance);
+            frame.dispose();
           } else {
             pinInput.setText("");
             cardNumberInput.setText("");
@@ -796,8 +859,8 @@ public class App {
           cardNumberInput.setText("");
         }
       } else if (e.getSource().equals(signupBtn)) {
-        frame.dispose();
         new SignupGUI();
+        frame.dispose();
       }
     }
   }
@@ -821,6 +884,9 @@ public class App {
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        if (fullScreen) {
+          frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        }
 
         panel.setLayout(new GridBagLayout());
         panel.setBackground(new Color(0xedebeb));
@@ -944,8 +1010,8 @@ public class App {
                 }
             }
         } else if (e.getSource().equals(signinBtn)) {
-            frame.dispose();
-            new SigninGUI();
+          new SigninGUI();
+          frame.dispose();
         }
     }
   }
@@ -965,6 +1031,9 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      if (fullScreen) {
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+      }
 
       panel.setLayout(new GridBagLayout());
       panel.setBackground(new Color(0xedebeb));
@@ -1039,11 +1108,11 @@ public class App {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(signinBtn)) {
+          new SigninGUI();
             frame.dispose();
-            new SigninGUI();
         } else if (e.getSource().equals(signupBtn)) {
+          new SignupGUI();
             frame.dispose();
-            new SignupGUI();
         }
     }
   }
@@ -1060,17 +1129,24 @@ public class App {
         if (frame != null) {
             JOptionPane.showMessageDialog(null, "Account Created Successfully!");
 
-            frame.dispose();
             new SigninGUI();
+            frame.dispose();
         }
     } else {
         JOptionPane.showMessageDialog(null, "Card Number Already Exist.");
     }
   }
 
+  public static void setFullScreen(boolean paramBoolean) {
+    fullScreen = paramBoolean;
+  }
+
   public static void main(String[] args) {
+    setFullScreen(true);
+
     createUser(12345, 123, "Jazmyre", 25, null);
     createUser(123, 456, "Celine", 150, null);
+
     new IntroGUI();
 
   }
