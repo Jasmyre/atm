@@ -16,3 +16,58 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+## How to use git
+
+# Add git name
+- git config --global user.name "name"
+
+# Remove git name
+- git config --global --unset user.name
+
+# Add git email
+- git config --global user.email example@gmail.com
+
+# Remove git email
+- git config --global --unset user.email
+
+# Set default branch
+- git config -- global init.default branch main
+
+# Get status
+- git status
+
+# Stage a file
+- git add .
+
+# Commit changes
+- git commit -m "Commit message"
+
+# See logs
+- git log
+
+# Jump to previous commits
+- git reset (git log --oneline #)
+
+# List all branches on the repository
+- git branch
+
+# Add a new branch
+- git branch BranchName
+
+# Delet branch
+- git branch -d BranchName
+
+# Switch branch
+- git switch BranchName
+
+# merge branches back to main branch
+- git merge -m "Message" BranchName
+
+# push all changes
+- git push --all
+
+# Download all the file in the repository
+- git fetch
+- git merge
+- git pull
