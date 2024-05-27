@@ -1185,8 +1185,7 @@ public class App {
     createUser(500, 500, "Viola", 500, null);
     createUser(600, 600, "Riego", 600, null);
     createUser(700, 700, "Ocampo", 700, null);
-    createUser(123, 123, "SpongeBob", 0, null);
-    createUser(123, 456, "Patric", 0, null);
+    createUser(123, 456, "SpongeBob", 0, null);
 
     System.out.println(rootPath);
     System.out.println(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()));
