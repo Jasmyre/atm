@@ -16,7 +16,7 @@ public class App {
   public static HashMap<Integer, Integer> balanceInfo = new HashMap<Integer, Integer>();
   public static ArrayList<Integer> usedCardNumbers = new ArrayList<Integer>();
 
-  public static String rootPath = URLDecoder.decode(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(), StandardCharsets.UTF_8);
+  public static String rootPath = URLDecoder.decode(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath(), StandardCharsets.UTF_8);
 
 
   public static boolean fullScreen = false;
@@ -36,7 +36,7 @@ public class App {
     JButton headerBackBtn = new JButton("Back");
 
     JPanel panel = new JPanel();
-    JLabel withdrawIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\withdraw1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
+    JLabel withdrawIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\withdraw1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
     JLabel withAmountLabel = new JLabel("<html><h3 style='padding: 0; margin: 0; color: #666666;'>Amount:</h3></html>");
     JTextField withAmount = new JTextField();
     JButton confirmBtn = new JButton("confirm");
@@ -209,7 +209,7 @@ public class App {
 
     JButton headerBackBtn = new JButton("Back");
 
-    JLabel depositIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\deposit1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
+    JLabel depositIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\deposit1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
     JPanel panel = new JPanel();
     JTextField depoAmount = new JTextField();
     JLabel depoAmountLabel = new JLabel("<html><h3 style='padding: 0; margin: 0; color: #666666;'>Amount:</h3></html>");
@@ -388,7 +388,7 @@ public class App {
 
     JButton headerBackBtn = new JButton("Back");
 
-    JLabel balanceIcon = new JLabel(new ImageIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\balance1.").getImage().getScaledInstance(350, 225, Image.SCALE_SMOOTH)));
+    JLabel balanceIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\balance1.png").getImage().getScaledInstance(350, 225, Image.SCALE_SMOOTH)));
     JPanel panel = new JPanel();
     JButton backBtn = new JButton("Back");
     JButton logoutBtn = new JButton("log out.");
@@ -581,7 +581,7 @@ public class App {
 
   public static class HomeGUI implements ActionListener {
     JFrame frame = new JFrame("HOME");
-    JLabel atnIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH)));
+    JLabel atnIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH)));
 
     JPanel panel = new JPanel();
     JPanel innerPanel = new JPanel();
@@ -761,7 +761,7 @@ public class App {
     JButton signinBtn = new JButton("Continue →");
     JButton signupBtn = new JButton("sign up.");
     JPanel panel = new JPanel();
-    JLabel pfp = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\default-pfp.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
+    JLabel pfp = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\default-pfp.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
 
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -1053,7 +1053,7 @@ public class App {
   public static class IntroGUI implements ActionListener {
     JFrame frame = new JFrame("ATM");
     JPanel panel = new JPanel();
-    JLabel atmIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\intro.png").getImage().getScaledInstance(225, 225, Image.SCALE_SMOOTH)));
+    JLabel atmIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\img\\intro.png").getImage().getScaledInstance(225, 225, Image.SCALE_SMOOTH)));
     JLabel atmHeader = new JLabel("<html><h1 style='font-weight; bold;'>Welcome!</h1></html>");
     JButton signupBtn = new JButton("Sign Up");
     JButton signinBtn = new JButton("Sign In");
@@ -1185,8 +1185,12 @@ public class App {
     createUser(500, 500, "Viola", 500, null);
     createUser(600, 600, "Riego", 600, null);
     createUser(700, 700, "Ocampo", 700, null);
+    createUser(123, 123, "SpongeBob", 0, null);
+    createUser(123, 456, "Patric", 0, null);
 
     System.out.println(rootPath);
+    System.out.println(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()));
+    System.out.println(URLDecoder.decode(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getPath(), StandardCharsets.UTF_8));
 
     new IntroGUI();
 
