@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.MouseAdapter;
+import java.io.File;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 public class App {
 
@@ -12,6 +15,9 @@ public class App {
   public static HashMap<Integer, String> nameInfo = new HashMap<Integer, String>();
   public static HashMap<Integer, Integer> balanceInfo = new HashMap<Integer, Integer>();
   public static ArrayList<Integer> usedCardNumbers = new ArrayList<Integer>();
+
+  public static String rootPath = URLDecoder.decode(new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent(), StandardCharsets.UTF_8);
+
 
   public static boolean fullScreen = false;
 
@@ -30,7 +36,7 @@ public class App {
     JButton headerBackBtn = new JButton("Back");
 
     JPanel panel = new JPanel();
-    JLabel withdrawIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\withdraw1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
+    JLabel withdrawIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\withdraw1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
     JLabel withAmountLabel = new JLabel("<html><h3 style='padding: 0; margin: 0; color: #666666;'>Amount:</h3></html>");
     JTextField withAmount = new JTextField();
     JButton confirmBtn = new JButton("confirm");
@@ -49,16 +55,22 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      
       if (fullScreen) {
+          
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
       }
 
-      header.setLayout(new BorderLayout());
+        header.setLayout(new BorderLayout());
+        header.setBackground(new Color(0x1ebdff));
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
 
         headerDiv1.setLayout(new GridBagLayout());
+        headerDiv1.setBackground(new Color(0x1ebdff));
         headerDiv2.setLayout(new GridBagLayout());
+        headerDiv2.setBackground(new Color(0x1ebdff));
         headerDiv3.setLayout(new GridBagLayout());
+        headerDiv3.setBackground(new Color(0x1ebdff));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -128,6 +140,7 @@ public class App {
         withAmount.setColumns(20);
         withAmount.setPreferredSize(new Dimension(0, 32));
         panel.add(withAmount, gbc);
+        panel.setBackground(new Color(0x1ebdff));
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -155,7 +168,6 @@ public class App {
                 }
             });
         panel.add(confirmBtn, gbc);
-
         frame.add(innerPanel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -197,7 +209,7 @@ public class App {
 
     JButton headerBackBtn = new JButton("Back");
 
-    JLabel depositIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\deposit1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
+    JLabel depositIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\deposit1.png").getImage().getScaledInstance(175, 175, Image.SCALE_SMOOTH)));
     JPanel panel = new JPanel();
     JTextField depoAmount = new JTextField();
     JLabel depoAmountLabel = new JLabel("<html><h3 style='padding: 0; margin: 0; color: #666666;'>Amount:</h3></html>");
@@ -217,16 +229,21 @@ public class App {
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        panel.setBackground(new Color(0x1ebdff));
         if (fullScreen) {
           frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         header.setLayout(new BorderLayout());
+        header.setBackground(new Color(0x1ebdff));
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
 
         headerDiv1.setLayout(new GridBagLayout());
+        headerDiv1.setBackground(new Color(0x1ebdff));
         headerDiv2.setLayout(new GridBagLayout());
+        headerDiv2.setBackground(new Color(0x1ebdff));
         headerDiv3.setLayout(new GridBagLayout());
+        headerDiv3.setBackground(new Color(0x1ebdff));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -371,7 +388,7 @@ public class App {
 
     JButton headerBackBtn = new JButton("Back");
 
-    JLabel balanceIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\balance1.png").getImage().getScaledInstance(350, 225, Image.SCALE_SMOOTH)));
+    JLabel balanceIcon = new JLabel(new ImageIcon(new ImageIcon("C:\\Users\\admin\\Downloads\\balance1.").getImage().getScaledInstance(350, 225, Image.SCALE_SMOOTH)));
     JPanel panel = new JPanel();
     JButton backBtn = new JButton("Back");
     JButton logoutBtn = new JButton("log out.");
@@ -381,7 +398,7 @@ public class App {
 
     int userBalance;
     String userName;
-
+    
     BalanceGUI(String paramUserName, int paramUserBalance) {
         userName = paramUserName;
         userBalance = paramUserBalance;
@@ -407,16 +424,21 @@ public class App {
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        panel.setBackground(new Color(0x1ebdff));
         if (fullScreen) {
           frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         header.setLayout(new BorderLayout());
+        header.setBackground(new Color(0x1ebdff));
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
 
         headerDiv1.setLayout(new GridBagLayout());
+        headerDiv1.setBackground(new Color(0x1ebdff));
         headerDiv2.setLayout(new GridBagLayout());
+        headerDiv2.setBackground(new Color(0x1ebdff));
         headerDiv3.setLayout(new GridBagLayout());
+        headerDiv3.setBackground(new Color(0x1ebdff));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -559,7 +581,7 @@ public class App {
 
   public static class HomeGUI implements ActionListener {
     JFrame frame = new JFrame("HOME");
-    JLabel atnIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH)));
+    JLabel atnIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\atm1.png").getImage().getScaledInstance(375,275, Image.SCALE_SMOOTH)));
 
     JPanel panel = new JPanel();
     JPanel innerPanel = new JPanel();
@@ -576,7 +598,7 @@ public class App {
     JButton withdraw = new JButton("Withdraw");
 
     GridBagConstraints gbc = new GridBagConstraints();
-
+    
     String userName;
     int userBalance;
 
@@ -589,17 +611,23 @@ public class App {
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        //panel.setBackground(new Color(0x1ebdff));
+        panel.add(atnIcon);
         if (fullScreen) {
           frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         header.setLayout(new BorderLayout());
+        header.setBackground(new Color(0x1ebdff));
         header.setBorder(BorderFactory.createEmptyBorder(8, 24, 8, 24));
 
         headerDiv1.setLayout(new GridBagLayout());
+        headerDiv1.setBackground(new Color(0x1ebdff));
         headerDiv2.setLayout(new GridBagLayout());
+        headerDiv2.setBackground(new Color(0x1ebdff));
         headerDiv3.setLayout(new GridBagLayout());
-
+        headerDiv3.setBackground(new Color(0x1ebdff)); 
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         logo.setForeground(new Color(0x000000));
@@ -691,6 +719,7 @@ public class App {
         header.add(headerDiv3, BorderLayout.EAST);
 
         panel.setLayout(new GridBagLayout());
+        panel.setBackground(new Color(0x1ebdff));
         gbc.insets = new Insets(8, 8, 8, 8);
 
         innerPanel.setLayout(new BorderLayout());
@@ -732,7 +761,7 @@ public class App {
     JButton signinBtn = new JButton("Continue →");
     JButton signupBtn = new JButton("sign up.");
     JPanel panel = new JPanel();
-    JLabel pfp = new JLabel(new ImageIcon(new ImageIcon(".\\img\\default-pfp.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
+    JLabel pfp = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\default-pfp.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH)));
 
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -741,6 +770,7 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      panel.setBackground(Color.cyan);
       if (fullScreen) {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
       }
@@ -751,6 +781,7 @@ public class App {
       gbc.gridx = 0;
       gbc.gridy = 0;
       panel.add(signinHeader, gbc);
+      panel.setBackground(new Color(0x1ebdff));
 
       gbc.gridx = 0;
       gbc.gridy = 1;
@@ -880,16 +911,19 @@ public class App {
 
     GridBagConstraints gbc = new GridBagConstraints();
     SignupGUI() {
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(750, 500);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
+        panel.setBackground(Color.cyan);
         if (fullScreen) {
+          
           frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         }
 
         panel.setLayout(new GridBagLayout());
-        panel.setBackground(new Color(0xedebeb));
+        panel.setBackground(new Color(0x1ebdff));
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -1019,8 +1053,8 @@ public class App {
   public static class IntroGUI implements ActionListener {
     JFrame frame = new JFrame("ATM");
     JPanel panel = new JPanel();
-    JLabel atmIcon = new JLabel(new ImageIcon(new ImageIcon(".\\img\\intro.png").getImage().getScaledInstance(225, 225, Image.SCALE_SMOOTH)));
-    JLabel atmHeader = new JLabel("<html><h1 style='font-weight; bold;'>Wellcome!</h1></html>");
+    JLabel atmIcon = new JLabel(new ImageIcon(new ImageIcon(rootPath + ".\\src\\img\\intro.png").getImage().getScaledInstance(225, 225, Image.SCALE_SMOOTH)));
+    JLabel atmHeader = new JLabel("<html><h1 style='font-weight; bold;'>Welcome!</h1></html>");
     JButton signupBtn = new JButton("Sign Up");
     JButton signinBtn = new JButton("Sign In");
 
@@ -1031,12 +1065,13 @@ public class App {
       frame.setSize(750, 500);
       frame.setLocationRelativeTo(null);
       frame.setLayout(new BorderLayout());
+      
       if (fullScreen) {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
       }
 
       panel.setLayout(new GridBagLayout());
-      panel.setBackground(new Color(0xedebeb));
+      panel.setBackground(new Color(0x1ebdff));
 
       gbc.gridx = 0;
         gbc.gridy = 0;
@@ -1100,7 +1135,7 @@ public class App {
             }
         });
       panel.add(signinBtn, gbc);      
-
+      
       frame.add(panel, BorderLayout.CENTER);
       frame.setVisible(true);
     }
@@ -1142,10 +1177,16 @@ public class App {
   }
 
   public static void main(String[] args) {
-    setFullScreen(true);
 
-    createUser(12345, 123, "Jazmyre", 25, null);
-    createUser(123, 456, "Celine", 150, null);
+    createUser(100, 100, "Jazmyre", 100, null);
+    createUser(200, 200, "Talamisan", 200, null);
+    createUser(300, 300, "Abujen", 300, null);
+    createUser(400, 400, "Quebic", 400, null);
+    createUser(500, 500, "Viola", 500, null);
+    createUser(600, 600, "Riego", 600, null);
+    createUser(700, 700, "Ocampo", 700, null);
+
+    System.out.println(rootPath);
 
     new IntroGUI();
 
